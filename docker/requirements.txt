@@ -11,7 +11,7 @@ pytest==8.1.1
 requests==2.31.0
 six==1.16.0
 tomli==2.0.1
-urllib3==2.2.1
+urllib3==2.2.2
 validators==0.28.1
 
 umbrella_monitor==1.0.1
