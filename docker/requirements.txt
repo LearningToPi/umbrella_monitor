@@ -1,4 +1,4 @@
-certifi==2024.2.2
+certifi==2024.7.4
 charset-normalizer==3.3.2
 exceptiongroup==1.2.1
 hvac==2.1.0
