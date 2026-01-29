@@ -5,7 +5,7 @@
 exec() {
     "$@" &
     pid="$!"
-    trap 'kill `pidof python3`' SIGTERM
+    trap 'kill `pidof python3`' SIGTERM SIGINT
     wait
 }
 
