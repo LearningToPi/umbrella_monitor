@@ -1,34 +1,37 @@
 FROM python:3.12
 
+ARG SOURCE_DISTRO
+ARG SOURCE_TAG
+ARG BUILD_VERSION
+
 ARG USERNAME
 ARG UID
 ENV USERNAME=${USERNAME:-python}
 ENV UID=${UID:-1000}
 
-LABEL org.label-schema.schema-version = "1.0"
-LABEL org.label-schema.name "Umbrella IP Monitor"
-LABEL org.label-schema.vendor "LearningToPi.com"
-LABEL org.label-schema.description "Python service to check and update Umbrella network IP addressing."
-LABEL org.label-schema.usage "/app/README.md"
-LABEL org.label-schema.url = "https://www.learningtopi.com/python-modules-applications/umbrella_monitor/"
-LABEL org.label-schema.vcs-url = "https://github.com/LearningToPi/umbrella_monitor"
-LABEL org.label-schema.vcs-ref = "0965349"
-LABEL org.label-schema.version = "1.0.2"
-LABEL org.label-schema.release = "py3.12"
-LABEL org.label-schema.changelog-url = "https://github.com/LearningToPi/umbrella_monitor/blob/main/release_notes/v1.0.2.md"
+LABEL version="$BUILD_VERSION"
+LABEL org.opencontainers.image.title="Umbrella IP Monitor"
+LABEL org.opencontainers.image.description="Python service to check and update Umbrella network IP addressing."
+LABEL org.opencontainers.image.ref.name="learningtopi/umbrella_monitor"
+LABEL org.opencontainers.image.version="$BUILD_VERSION"
+LABEL org.opencontainers.image.source="https://github.com/LearningToPi/umbrella_monitor"
+LABEL org.opencontainers.image.vendor="LearningToPi.com"
+LABEL org.opencontainers.image.base.name="docker.io/$SOURCE_DISTRO:$SOURCE_TAG"
+LABEL org.opencontainers.image.documentation="/README.md"
 
-LABEL org.label-schema.docker.cmd = 'docker run --name umbrella_monitor -v config.toml:/app/config.toml learningtopi/umbrella_monitor'
-LABEL org.label-schema.docker.cmd.help = "docker run --rm -it learningtopi/umbrella_monitor --help"
-
-WORKDIR /apps
+LABEL org.label-schema.docker.cmd='docker run --name umbrella_monitor -v config.toml:/app/config.toml learningtopi/umbrella_monitor'
+LABEL org.label-schema.docker.cmd.help="docker run --rm -it learningtopi/umbrella_monitor --help"
 
 RUN apt update && apt install net-tools -y && apt clean
 RUN adduser --disabled-password --gecos '' $USERNAME -u $UID
 RUN mkdir /app && chown $USERNAME:$USERNAME /app
 USER $USERNAME:$USERNAME
 
-ADD docker/requirements.txt /app
-ADD docker/entrypoint.sh /app
+WORKDIR /app
+
+ADD README.md /README.md
+ADD requirements.txt /app
+ADD entrypoint.sh /app
 ADD README.md /app
 ENV PYTHONPATH="/app"
 RUN pip3 install -r /app/requirements.txt
