@@ -343,6 +343,23 @@ class TomlConfigMgr:
             return str(value)
         return value
 
+    def get_default(self, section:str, key:str):
+        """
+        Return the default value for a specific key.
+
+        Args:
+            section (str): The section name.
+            key (str): The key within the section.
+
+        Returns:
+            The default value associated with the key.
+        """
+        value = self._config[section][key].get('default', None)
+        # Need to recast to a string if one of the special classes
+        if isinstance(value, CAST_TO_STR):
+            return str(value)
+        return value
+
     @property
     def required_ok(self):
         """

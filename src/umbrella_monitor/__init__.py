@@ -12,7 +12,7 @@ from requests.packages.urllib3.poolmanager import PoolManager # type: ignore
 # pylint: disable-next=import-error
 from requests.packages.urllib3.connection import HTTPConnection # type: ignore
 
-VERSION = (1, 0, 1)    # updated 2024-04-28 19:51:45.446632 from : (1, 0, 0)
+VERSION = (1, 0, 3)    # updated 2026-01-28 22:26:58.858002 from : (1, 0, 2)
 
 IP_CHECK_URL = 'http://checkip.dyndns.org/'
 IP_CHECK_REGEX = r'Current IP Address:\s*([0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3})'
