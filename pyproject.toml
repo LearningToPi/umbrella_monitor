@@ -1,6 +1,6 @@
 [project]
 name = "umbrella_monitor"
-version = "1.0.2"
+version = "1.0.3"
 description = "Python service to check and update Umbrella network IP addressing."
 authors = [{name = "Thomas Dunteman", email= "git@learningtopi.com"}]
 keywords = ["umbrella", "dns"]
@@ -26,6 +26,7 @@ dependencies = [
 	"typing_extensions==4.15.0",
 	"urllib3==2.6.3",
 	"validators==0.35.0"]
+
 [project.urls]
 "homepage" = "https://www.learningtopi.com/python-modules-applications/umbrella_monitor/"
 "bug tracker" = "https://github.com/LearningToPi/umbrella_monitor/issues"
